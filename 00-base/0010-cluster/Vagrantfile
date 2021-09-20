@@ -1,0 +1,55 @@
+VMs = {
+    leader: {
+        :eth1 => "10.1.1.10",
+        :mem => "1024",
+        :cpu => "1"
+    },
+    node1: {
+        :eth1 => "10.1.1.11",
+        :mem => "512",
+        :cpu => "1"
+    },
+    node2: {
+        :eth1 => "10.1.1.12",
+        :mem => "512",
+        :cpu => "1"
+    }
+}
+
+Vagrant.configure(2) do |config|
+    CONFIG_NAME = File::basename(File::dirname(__FILE__))
+ 
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = false
+    config.hostmanager.manage_guest = true
+    config.hostmanager.include_offline = true
+
+    config.vm.box = "ubuntu/focal64"
+    
+    config.vm.provision "shell", inline: "/vagrant/scripts/boot.sh && /vagrant/scripts/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")
+    
+    VMs.each do |key, opts|
+        _name = key.id2name
+        config.vm.define _name do |config|
+
+            config.vm.hostname = _name
+            config.vm.network :private_network, ip: opts[:eth1]
+
+            config.vm.provider "virtualbox" do |vb|
+
+                vb.name = "Vagrant." + CONFIG_NAME + "." + _name + "." + Time.new.strftime("%Y-%m-%d-%H%M%S")
+                #vb.gui = true
+
+                vb.cpus = opts[:cpu]
+                vb.memory = opts[:mem]
+
+                vb.customize ["modifyvm", :id, "--cpuexecutioncap", "75"]
+                vb.customize ["setextradata", :id, "GUI/HideFromManager", "true"]
+
+            end
+
+        end
+    end
+ 
+end
+
