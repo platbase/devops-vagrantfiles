@@ -6,6 +6,8 @@ set -o errexit
 timedatectl set-timezone Asia/Shanghai
 timedatectl
 
+rm -fv /tmp/*-cluster-ready
+
 USER_BOOT="/vagrant/usr/boot.sh"
 if [ -f "${USER_BOOT}" ]; then
 	echo "[$(date +%Y%m%d-%H%M%S)] >>> Begin to run user-boot script: '${USER_BOOT}' at host '$(hostname)' ..."

@@ -10,6 +10,9 @@ Vagrant.configure(2) do |config|
 
     config.vm.box = "ubuntu/focal64"
     
+    # Additional sync folder: compatible with inherited Vagrantfile
+    config.vm.synced_folder "../../00-base/0010-cluster/var/", "/vagrant/var"
+    
     config.vm.provision "shell", inline: "/vagrant/var/boot.sh"
     config.vm.provision "shell", inline: "/vagrant/var/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")
     config.vm.provision "shell", inline: "sudo -u vagrant /vagrant/var/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")

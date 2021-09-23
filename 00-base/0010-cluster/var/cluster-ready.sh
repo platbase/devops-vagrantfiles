@@ -1,22 +1,29 @@
 #! /bin/bash
 
 set -o nounset
-set -o errexit
+#set -o errexit
 
 echo "[$(date +%Y%m%d-%H%M%S)] >>> Waiting for Cluser Ready ..."
 
-LOOP_COUNT=0
+LOOP_COUNT=1
 MAX_LOOP_COUNT=180
 while [ ! -f /tmp/root-cluster-ready  ]; do
-	printf " $LOOP_COUNT"
+	printf "..$LOOP_COUNT"
+	
+	((_EVERY10LOOP=LOOP_COUNT%10))
+	if [ ${_EVERY10LOOP} -eq 0 ]; then
+		printf "\n"
+	fi
+	
     sleep 1
 
-    ((LOOP_COUNT=LOOP_COUNT+1))
     if [ ${LOOP_COUNT} -gt ${MAX_LOOP_COUNT} ]; then	#Waiting for 120 seconds
     	printf "\n"
     	echo "[$(date +%Y%m%d-%H%M%S)] >>> ERROR: Cluster Timeout - wating more then ${MAX_LOOP_COUNT} seconds."
     	exit -1
     fi
+    
+    ((LOOP_COUNT=LOOP_COUNT+1))
 done
 printf "\n"
 
