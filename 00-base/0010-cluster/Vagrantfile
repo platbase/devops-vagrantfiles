@@ -1,18 +1,19 @@
 VMs = {
     leader: {
         :eth1 => "10.1.1.10",
+        :cpu => "1",
         :mem => "1024",
-        :cpu => "1"
+        :ports => { 80 => 58080 }
     },
     node1: {
         :eth1 => "10.1.1.11",
-        :mem => "512",
-        :cpu => "1"
+        :cpu => "1",
+        :mem => "512"
     },
     node2: {
         :eth1 => "10.1.1.12",
-        :mem => "512",
-        :cpu => "1"
+        :cpu => "1",
+        :mem => "512"
     }
 }
 
@@ -26,15 +27,29 @@ Vagrant.configure(2) do |config|
 
     config.vm.box = "ubuntu/focal64"
     
-    config.vm.provision "shell", inline: "/vagrant/scripts/boot.sh && /vagrant/scripts/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")
+    config.vm.provision "shell", inline: "/vagrant/var/boot.sh"
+    config.vm.provision "shell", inline: "/vagrant/var/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")
+    config.vm.provision "shell", inline: "sudo -u vagrant /vagrant/var/ssh_prepare_publickeys.sh " + VMs.keys().join(" ")
     
+    VM_COUNT = 0
     VMs.each do |key, opts|
         _name = key.id2name
         config.vm.define _name do |config|
 
             config.vm.hostname = _name
             config.vm.network :private_network, ip: opts[:eth1]
+            
+            if (opts.has_key?(:ports)) then
+                opts[:ports].each do |guestPort, hostPort|
+                    config.vm.network "forwarded_port", guest: guestPort, host: hostPort
+                end
+            end
 
+			VM_COUNT += 1
+            if (VM_COUNT == VMs.length) then
+                config.vm.provision "shell", inline: "/vagrant/var/cluster-ready.sh"
+            end
+           
             config.vm.provider "virtualbox" do |vb|
 
                 vb.name = "Vagrant." + CONFIG_NAME + "." + _name + "." + Time.new.strftime("%Y-%m-%d-%H%M%S")

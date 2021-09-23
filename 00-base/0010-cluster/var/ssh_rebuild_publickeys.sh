@@ -28,9 +28,12 @@ function trySSHConnections(){
 echo "[$(date +%Y%m%d-%H%M%S)] >>> Begin to build authorized_keys for: $@ ..."
 
 #Copy all id_rsa.pub files together
-head -n 1 ~/.ssh/authorized_keys > /tmp/authorized_keys    #First line is the original content
-cat /tmp/authorized_keys > ~/.ssh/authorized_keys
-cat /vagrant/.vagrant/.config/ssh-keys/* >> ~/.ssh/authorized_keys
+if [ "root" != "$(id -ng)" ]; then
+	# User "vagrant" - the first line is built by vagrant, for "vagrant ssh" command 
+    head -n 1 ~/.ssh/authorized_keys > /tmp/authorized_keys
+    cat /tmp/authorized_keys > ~/.ssh/authorized_keys
+fi
+cat /vagrant/.vagrant/.config/ssh-keys/$(id -nu)-* >> ~/.ssh/authorized_keys
 
 echo "~/.ssh/authorized_keys:"
 cat ~/.ssh/authorized_keys
@@ -41,6 +44,9 @@ if [ "$?" == "0" ]; then
    
    # Remove ssh_rebuild_publickeys.sh crontab task
    crontab -l | sed -e '/ssh_rebuild_publickeys\.sh/d' | crontab -
+   
+   # Mark cluster-ready
+   echo "$@" > /tmp/$(id -nu)-cluster-ready
 else
    echo "[$(date +%Y%m%d-%H%M%S)] >>> SSH connection testing fail, waiting next try ..."
 fi
