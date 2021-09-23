@@ -6,7 +6,7 @@ set -o errexit
 echo "[$(date +%Y%m%d-%H%M%S)] >>> Waiting for Cluser Ready ..."
 
 LOOP_COUNT=0
-MAX_LOOP_COUNT=120
+MAX_LOOP_COUNT=180
 while [ ! -f /tmp/root-cluster-ready  ]; do
 	printf " $LOOP_COUNT"
     sleep 1
