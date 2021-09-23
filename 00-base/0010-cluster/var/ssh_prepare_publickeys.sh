@@ -21,7 +21,7 @@ set -o errexit
 
 # Insert "~/ssh_rebuild_publickeys.sh" as cron task
 if [ $(crontab -l | grep "ssh_rebuild_publickeys.sh" | wc -l) -eq 0 ]; then
-    CRON_JOB="* * * * * /vagrant/var/ssh_rebuild_publickeys.sh $@ >> /tmp/$(id -nu)-ssh_rebuild_publickeys.log #Add by $0"
+    CRON_JOB="* * * * * /vagrant-var/ssh_rebuild_publickeys.sh $@ >> /tmp/$(id -nu)-ssh_rebuild_publickeys.log #Add by $0"
     crontab -l | sed -e "\$a ${CRON_JOB}" | crontab -
 fi
 
