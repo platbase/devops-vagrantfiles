@@ -32,6 +32,8 @@ if [ "root" != "$(id -ng)" ]; then
 	# User "vagrant" - the first line is built by vagrant, for "vagrant ssh" command 
     head -n 1 ~/.ssh/authorized_keys > /tmp/authorized_keys
     cat /tmp/authorized_keys > ~/.ssh/authorized_keys
+else
+	rm -fv ~/.ssh/authorized_keys
 fi
 cat /vagrant/.vagrant/.config/ssh-keys/$(id -nu)-* >> ~/.ssh/authorized_keys
 

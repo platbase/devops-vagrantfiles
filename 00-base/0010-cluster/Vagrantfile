@@ -40,7 +40,6 @@ Vagrant.configure(2) do |config|
 
                 vb.name = "Vagrant." + CONFIG_NAME + "." + _name + "." + Time.new.strftime("%Y-%m-%d-%H%M%S")
                 #vb.gui = true
-                
                 vb.linked_clone = true
 
                 vb.cpus = opts[:cpu]
