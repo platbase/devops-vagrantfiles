@@ -15,7 +15,10 @@ pushd /vagrant/kubesphere/.work
 
 export KKZONE=cn
 
-curl -sfL https://get-kk.kubesphere.io | VERSION=v1.1.1 sh -
+#curl -sfL https://get-kk.kubesphere.io | VERSION=v1.1.1 sh -
+curl -L https://get-kk.kubesphere.io -o get-kk.sh
+cat get-kk.sh | VERSION=v1.1.1 sh -
+
 chmod +x kk
 
 _START="$(date +%Y%m%d-%H%M%S)"

@@ -8,7 +8,6 @@ spec:
   hosts:
   - {name: main1, address: 10.1.1.11, internalAddress: 10.1.1.11, privateKeyPath: "~/.ssh/id_rsa"}
   - {name: node1, address: 10.1.1.21, internalAddress: 10.1.1.21, privateKeyPath: "~/.ssh/id_rsa"}
-  - {name: node2, address: 10.1.1.22, internalAddress: 10.1.1.22, privateKeyPath: "~/.ssh/id_rsa"}
   roleGroups:
     etcd:
     - main1
@@ -16,7 +15,6 @@ spec:
     - main1
     worker:
     - node1
-    - node2
   controlPlaneEndpoint:
     domain: lb.kubesphere.local
     address: ""
