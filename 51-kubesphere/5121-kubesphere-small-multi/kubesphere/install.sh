@@ -25,6 +25,6 @@ _START="$(date +%Y%m%d-%H%M%S)"
 
 echo "yes" | ./kk create cluster -f ../config-vagrant.yaml -
 
-echo "[$(date +%Y%m%d-%H%M%S)] >>> Run '$0' success, from [$_START]."
+echo "[$(date +%Y%m%d-%H%M%S)] >>> Run '$0' successfully, from [$_START]."
 
 popd
