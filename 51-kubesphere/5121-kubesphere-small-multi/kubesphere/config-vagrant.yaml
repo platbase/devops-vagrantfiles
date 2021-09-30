@@ -85,13 +85,13 @@ spec:
   auditing:    
     enabled: false
   devops:           
-    enabled: false
-    jenkinsMemoryLim: 2Gi     
-    jenkinsMemoryReq: 1500Mi 
+    enabled: true
+    jenkinsMemoryLim: 1500Mi     
+    jenkinsMemoryReq: 500Mi 
     jenkinsVolumeSize: 8Gi   
-    jenkinsJavaOpts_Xms: 512m  
+    jenkinsJavaOpts_Xms: 256m  
     jenkinsJavaOpts_Xmx: 512m
-    jenkinsJavaOpts_MaxRAM: 2g
+    jenkinsJavaOpts_MaxRAM: 1g
   events:          
     enabled: false
     ruler:
@@ -106,8 +106,8 @@ spec:
     enabled: false
   monitoring:
     storageClass: ""
-    prometheusMemoryRequest: 400Mi  
-    prometheusVolumeSize: 20Gi  
+    prometheusMemoryRequest: 200Mi  
+    prometheusVolumeSize: 8Gi  
   multicluster:
     clusterRole: none 
   network:

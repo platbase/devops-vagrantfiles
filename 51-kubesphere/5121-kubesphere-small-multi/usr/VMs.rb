@@ -2,7 +2,7 @@ VMs = {
     main1: {
         :eth1 => "10.1.1.11",
         :cpu => "4", :cpu_cap => 0.5,
-        :mem => "6144",  # IF worked as both master and node, the minimum amount of memory is 6G
+        :mem => "4096",
         :ports => { 30880 => 30880 }
     },
     node1: {

@@ -16,7 +16,7 @@ pushd /vagrant/kubesphere/.work
 export KKZONE=cn
 
 #curl -sfL https://get-kk.kubesphere.io | VERSION=v1.1.1 sh -
-curl -L https://get-kk.kubesphere.io -o get-kk.sh
+wget -O get-kk.sh https://get-kk.kubesphere.io
 cat get-kk.sh | VERSION=v1.1.1 sh -
 
 chmod +x kk
