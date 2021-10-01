@@ -60,7 +60,7 @@ spec:
     openldap:
       enabled: false
     openldapVolumeSize: 2Gi  
-    minioVolumeSize: 8Gi
+    minioVolumeSize: 16Gi
     monitoring:
       endpoint: http://prometheus-operated.kubesphere-monitoring-system.svc:9090
     es:  
@@ -116,7 +116,7 @@ spec:
     ippool:
       type: none
     topology:
-      type: true
+      type: weave-scope
   openpitrix:
     store:
       enabled: true
