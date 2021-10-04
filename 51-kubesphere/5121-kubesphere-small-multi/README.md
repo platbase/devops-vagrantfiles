@@ -16,10 +16,10 @@ Cluster use external ElasticSearch server, a build in ElasticSearch docker-compo
 Following is the ElasticSearch server starting example:
 
 > <div style="font-size:11px">
-> <pre><font color="#4E9A06"><b>u01@ubuntu-pc</b></font>:<font color="#3465A4"><b>~/.../devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi</b></font>$ dc-start elasticsearch-single
-> <font color="#3465A4"><b>NOTE:</b></font> Read docker-compose definition(@compose-services/*.yml) from <font color="#4E9A06"><b>.:/home/~/.platbase-devops-docker:/media/~/.../docker</b></font>
-> <font color="#3465A4"><b>NOTE:</b></font> Docker-compose found in <font color="#4E9A06"><b>/home/~/.../devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi/@compose-services/elasticsearch-single.yml</b></font>
-> <font color="#3465A4"><b>NOTE:</b></font> (recommended) to store container&apos;s runtime data in <font color="#4E9A06"><b>/home/~/.../devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi/@compose-services/elasticsearch-single/H.....devops-vagrantfiles.51-kubesphere.5121-kubesphere-small-multi</b></font>
+> <pre><font color="#4E9A06"><b>u01@ubuntu-pc</b></font>:<font color="#3465A4"><b>~/***/devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi</b></font>$ dc-start elasticsearch-single
+> <font color="#3465A4"><b>NOTE:</b></font> Read docker-compose definition(@compose-services/*.yml) from <font color="#4E9A06"><b>.:/home/~/.platbase-devops-docker:/media/~/***/docker</b></font>
+> <font color="#3465A4"><b>NOTE:</b></font> Docker-compose found in <font color="#4E9A06"><b>/home/~/***/devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi/@compose-services/elasticsearch-single.yml</b></font>
+> <font color="#3465A4"><b>NOTE:</b></font> (recommended) to store container&apos;s runtime data in <font color="#4E9A06"><b>/home/~/***/devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi/@compose-services/elasticsearch-single/H.....devops-vagrantfiles.51-kubesphere.5121-kubesphere-small-multi</b></font>
 > tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      -                   
 > tcp6       0      0 :::8080                 :::*                    LISTEN      -                   
 > tcp        0      0 0.0.0.0:18080           0.0.0.0:*               LISTEN      -                   
@@ -55,7 +55,7 @@ In VirtualBox NAT default, the value of `spce.common.es.externalElasticsearchUrl
 When build-in ElasticSearch server started, navigate to http://localhost:9200/_cat/indices?v&pretty . for example:
 
 > <div style="font-size:11px">
-> <pre><font color="#4E9A06"><b>u01@ubuntu-pc</b></font>:<font color="#3465A4"><b>~/.../devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi</b></font>$ curl &quot;http://localhost:9200/_cat/indices?v&amp;pretty&quot;
+> <pre><font color="#4E9A06"><b>u01@ubuntu-pc</b></font>:<font color="#3465A4"><b>~/***/devops-vagrantfiles/51-kubesphere/5121-kubesphere-small-multi</b></font>$ curl &quot;http://localhost:9200/_cat/indices?v&amp;pretty&quot;
 > health status index                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 > yellow open   ks-logstash-log-2021.10.03      ZMDGc10lTxeefdC_igTNvA   1   1     325417            0     60.8mb         60.8mb
 > yellow open   ks-logstash-events-2021.10.04   3YxZqsmSTZWyCJoNfE3zvw   1   1         78            0     75.4kb         75.4kb
