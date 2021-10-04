@@ -1,0 +1,21 @@
+---
+# Running on parent folder: dc-start elasticsearch-single
+version: '3'
+services:
+    elasticsearch-single:
+        image: elasticsearch:7.14.1
+        user: "${CURRENT_UID}:${CURRENT_GID}"
+        ports:
+            - "9200:9200"
+            #- "9300:9300"
+        volumes:
+            - ${RUNTIME_DIR}/data:/usr/share/elasticsearch/data
+        environment:
+            - TERM=xterm-256color    # make terminal of VSCode colorful
+            - discovery.type=single-node
+            - "ES_JAVA_OPTS=-Xms256m -Xmx512m"
+    volume-permissions-manager:
+        image: alpine:latest
+        command: sh -c "chown -Rv ${CURRENT_UID}:${CURRENT_GID} /usr/share/elasticsearch/data"
+        volumes:
+            - ${RUNTIME_DIR}/data:/usr/share/elasticsearch/data

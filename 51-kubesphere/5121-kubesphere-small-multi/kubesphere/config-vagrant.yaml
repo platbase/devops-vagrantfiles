@@ -60,22 +60,22 @@ spec:
     openldap:
       enabled: false
     openldapVolumeSize: 2Gi  
-    minioVolumeSize: 16Gi
+    minioVolumeSize: 20Gi
     monitoring:
       endpoint: http://prometheus-operated.kubesphere-monitoring-system.svc:9090
     es:  
-      elasticsearchMasterVolumeSize: 4Gi   
-      elasticsearchDataVolumeSize: 20Gi   
+      elasticsearchMasterVolumeSize: 1Gi
+      elasticsearchDataVolumeSize: 1Gi
       logMaxAge: 7          
       elkPrefix: logstash
       basicAuth:
         enabled: false
         username: ""
         password: ""
-      externalElasticsearchUrl: ""
-      externalElasticsearchPort: ""  
+      externalElasticsearchUrl: "10.0.2.2"
+      externalElasticsearchPort: "9200"  
   console:
-    enableMultiLogin: true 
+    enableMultiLogin: true
     port: 30880
   alerting:       
     enabled: false
@@ -83,7 +83,7 @@ spec:
     #   replicas: 1
     #   resources: {}
   auditing:    
-    enabled: false
+    enabled: true
   devops:           
     enabled: true
     jenkinsMemoryLim: 1500Mi     
@@ -93,12 +93,12 @@ spec:
     jenkinsJavaOpts_Xmx: 512m
     jenkinsJavaOpts_MaxRAM: 1g
   events:          
-    enabled: false
+    enabled: true
     ruler:
       enabled: true
       replicas: 2
   logging:         
-    enabled: false
+    enabled: true
     logsidecar:
       enabled: true
       replicas: 2
