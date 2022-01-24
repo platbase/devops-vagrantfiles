@@ -55,6 +55,7 @@ mysqlsh javascrip - reboot cluster(After all nodes reboot):
 
 ```javascript
 shell.connect('root@localhost:3306', '123456')
+dba.getCluster('mycluster').status() //Raise Error: Dba.getCluster: This function is not available through a session to a standalone instance (metadata exists, instance belongs to that metadata, but GR is not active) (MYSQLSH 51314)
 dba.rebootClusterFromCompleteOutage('mycluster')
 ```
 
